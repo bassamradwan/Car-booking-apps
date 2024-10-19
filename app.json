@@ -31,6 +31,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "05390ba9-2857-4a74-996d-2bf8f37d0e02"
+      }
+    },
+    "owner": "bassamradwan"
   }
 }
