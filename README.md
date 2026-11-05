@@ -1,50 +1,54 @@
-# Welcome to your Expo app 👋
+# Mini Driver: intercity ride sharing (React Native prototype)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile app prototype, in Arabic, for sharing rides between Egyptian cities. **Drivers** publish rides with a number of seats and a price, and **passengers** request rides and pick their route on a map.
 
-## Get started
+Built with **React Native, Expo and TypeScript**.
 
-1. Install dependencies
+> **Prototype:** the app runs on mock data (`data/`), with no backend yet. It shows the screens, the navigation and the ride logic.
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- **Two roles:** passenger and driver, each with their own sign-up screen.
+- **Onboarding** and login screens.
+- **Request a ride:** pickup point, destination, price and time, with a form built with React Native Paper.
+- **Map:** choose the start and end points by tapping the map, drawn with markers and a line between them (react-native-maps), using the device location (expo-location).
+- **Driver home:** the list of available rides, with accept and cancel actions.
+- **Ride details**, profile, services and contact screens.
+- **Tab navigation** with file-based routing (Expo Router).
 
-   ```bash
-    npx expo start
-   ```
+## Tech stack
 
-In the output, you'll find options to open the app in a
+| Part | Tech |
+|---|---|
+| App | React Native 0.74, Expo SDK 51, TypeScript |
+| Navigation | Expo Router (file-based routes, tabs) |
+| UI | React Native Paper, Expo Vector Icons, Linear Gradient |
+| Maps | react-native-maps, expo-location |
+| State | React Context (`AuthContext`) |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## How the code is organised
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/            routes (Expo Router): (tabs) for the main tabs, (routes) for the other screens
+screens/        the screens themselves (auth, home, ride, driver, profile...)
+components/     reusable pieces: ride cards, map, location and transport pickers
+context/        AuthContext: the signed-in user
+data/           mock data: users, cities, rides
+hooks/          ride logic on the mock data: create, request, accept, cancel
+types/          TypeScript types: User, City, Ride, RideStatus
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+A ride moves through these states: `pending → accepted → in_progress → completed`, or `cancelled`.
 
-## Learn more
+## Run it
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm install
+npx expo start      # scan the QR code with the Expo Go app
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Next steps
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- A real backend (authentication, rides, seat counts)
+- Real-time updates when a driver accepts a ride
+- Search rides by city and date
